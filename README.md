@@ -36,3 +36,7 @@ OR
 > - Calls the APIs OpenWeatherMap and/or ClimaTempo.
 >
 > **Ensure that redis container is up**.
+
+# Project struture
+
+Structuring of the project inspired by [VaughnVernon - Domain Driven Design](https://github.com/VaughnVernon/IDDD_Samples)
