@@ -1,5 +1,7 @@
 package org.mcezario.weather.search.application.representation;
 
+import java.io.Serializable;
+
 import org.apache.commons.lang3.StringUtils;
 import org.mcezario.weather.search.gateway.application.domain.model.ClimaTempoData;
 import org.mcezario.weather.search.gateway.application.domain.model.ClimaTempoDataResponse;
@@ -13,7 +15,9 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonInclude(Include.NON_NULL)
-public final class WeatherRepresentation {
+public final class WeatherRepresentation implements Serializable {
+
+	private static final long serialVersionUID = 4915206310231515678L;
 
 	private static final String DESCRIPTION_ATTRIBUTE = "description";
 	private static final String PRESSURE_ATTRIBUTE = "pressure";

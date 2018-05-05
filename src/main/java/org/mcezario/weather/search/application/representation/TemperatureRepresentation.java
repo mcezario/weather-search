@@ -1,5 +1,6 @@
 package org.mcezario.weather.search.application.representation;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 import org.mcezario.weather.search.gateway.application.domain.model.ClimaTempoData;
@@ -11,7 +12,9 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonInclude(Include.NON_NULL)
-public final class TemperatureRepresentation {
+public final class TemperatureRepresentation implements Serializable {
+
+	private static final long serialVersionUID = 323518934579412599L;
 
 	private static final String TEMPERATURE_ACTUAL = "actual";
 	private static final String TEMPERATURE_MIN = "min";

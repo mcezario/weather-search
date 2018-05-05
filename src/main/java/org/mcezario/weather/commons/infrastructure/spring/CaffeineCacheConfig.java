@@ -10,13 +10,15 @@ import org.springframework.cache.caffeine.CaffeineCache;
 import org.springframework.cache.support.SimpleCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.benmanes.caffeine.cache.Ticker;
 
 @EnableCaching
 @Configuration
-public class CacheConfig {
+@Profile("dev")
+public class CaffeineCacheConfig {
 
 	@Value("${cache.weather.expiration}")
 	private int weatherExpiration;

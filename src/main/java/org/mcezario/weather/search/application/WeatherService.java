@@ -11,7 +11,6 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 
 @Service
 public class WeatherService {
@@ -25,10 +24,7 @@ public class WeatherService {
 	private ClimatempoGatewayService climatempoGatewayService;
 
 	@Cacheable(value = "weather")
-	@HystrixCommand(fallbackMethod = "fallBackOfOpenWeatherMap", commandProperties = {
-		@HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "1000"),
-		@HystrixProperty(name = "execution.timeout.enabled", value = "true")
-	})
+	@HystrixCommand(fallbackMethod = "fallBackOfOpenWeatherMap")
 	public WeatherRepresentation findByCity(String city) {
 
 		LOGGER.debug("[OpenWeatherMap] Find by city={}", city);
@@ -37,10 +33,7 @@ public class WeatherService {
 
 	}
 
-	@HystrixCommand(fallbackMethod = "fallbackOfClimaTempo", commandProperties = {
-		@HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "2000"),
-		@HystrixProperty(name = "execution.timeout.enabled", value = "true")
-	})
+	@HystrixCommand(fallbackMethod = "fallbackOfClimaTempo")
 	public WeatherRepresentation fallBackOfOpenWeatherMap(String city) {
 
 		LOGGER.debug("[ClimaTempo] Find by city={}", city);
