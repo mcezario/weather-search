@@ -1,0 +1,20 @@
+- request:
+    method: GET
+    url: /api/v1/locale/city
+    query:
+        name: Valinhos
+        token: 12345
+  response:
+    headers:
+      content-type: application/json; charset=UTF-8
+    files: ["climaTempo/cities.json", { "status": 500 }]
+
+- request:
+    method: GET
+    url: /api/v1/weather/locale/3549/current
+    query:
+        token: 12345
+  response:
+    headers:
+      content-type: application/json; charset=UTF-8
+    files: ["climaTempo/current.json" ]

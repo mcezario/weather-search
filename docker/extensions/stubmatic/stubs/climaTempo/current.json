@@ -1,0 +1,17 @@
+{
+  "id": 3549,
+  "name": "Valinhos",
+  "state": "SP",
+  "country": "BR  ",
+  "data": {
+    "temperature": 27,
+    "wind_direction": "SSW",
+    "wind_velocity": 7,
+    "humidity": 34,
+    "condition": "Alguma nebulosidade",
+    "pressure": 1018,
+    "icon": "2",
+    "sensation": 27,
+    "date": "2018-05-04 19:35:30"
+  }
+}

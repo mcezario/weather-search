@@ -1,0 +1,15 @@
+version: '2'
+services:
+
+  stubmatic:
+    build: ./extensions/stubmatic
+    networks:
+      - weather
+    ports:
+      - '7777:7777'
+    volumes:
+      - ./extensions/stubmatic:/usr/src/app
+
+networks:
+  weather:
+    driver: bridge

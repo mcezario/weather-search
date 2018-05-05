@@ -1,0 +1,12 @@
+- request:
+    method: GET
+    url: /data/2.5/weather
+    query:
+        q: Campinas,br
+        appid: 12345
+        lang: pt
+        units: metric
+  response:
+    headers:
+      content-type: application/json; charset=UTF-8
+    files: ["openWeatherMap/weather.json", { "status": 500 }]
