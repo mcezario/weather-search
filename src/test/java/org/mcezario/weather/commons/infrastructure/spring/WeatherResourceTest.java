@@ -4,16 +4,23 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
 import java.math.BigDecimal;
+import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mcezario.weather.commons.application.representation.ExceptionRepresentation;
+import org.mcezario.weather.commons.resource.ContentNegotiation;
 import org.mcezario.weather.search.application.representation.WeatherRepresentation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
@@ -22,6 +29,16 @@ public class WeatherResourceTest {
 
 	@Autowired
 	private TestRestTemplate restTemplate;
+
+	@Before
+    public void setUp() {
+		final List<ClientHttpRequestInterceptor> interceptors = restTemplate.getRestTemplate().getInterceptors();
+
+		final String accept = StringUtils.join(ContentNegotiation.DESKTOP_V1, ",", ContentNegotiation.MOBILE_V1);
+		interceptors.add(new HeaderRequestInterceptor(HttpHeaders.ACCEPT, accept));
+
+		interceptors.add(new HeaderRequestInterceptor(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE));
+	}
 
 	@Test
 	public void shouldGetWeatherOfOpenWeatherMapWithoutFallback() {
