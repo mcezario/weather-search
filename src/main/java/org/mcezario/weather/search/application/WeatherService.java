@@ -43,6 +43,9 @@ public class WeatherService {
 	}
 
 	public WeatherRepresentation fallbackOfClimaTempo(String city) {
+
+		LOGGER.error("Error to find by city={}", city);
+
 		throw new CityNotFoundException(city);
 	}
 }

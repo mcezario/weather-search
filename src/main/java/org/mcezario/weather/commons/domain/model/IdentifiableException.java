@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 public abstract class IdentifiableException extends RuntimeException {
 
+	private static final long serialVersionUID = 2319108117813027799L;
+
 	private static final String MESSAGE_FORMAT = "[%s] %s";
 
 	private final Id id;
