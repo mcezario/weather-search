@@ -45,6 +45,8 @@ OR
 > - Calls the APIs OpenWeatherMap and/or ClimaTempo.
 >
 > **Ensure that redis container is up**.
+>
+> *** If you want to track the keys in the redis cache, **ensure that redis-commander container is up** and access http://localhost:8081
 
 # Project struture
 
