@@ -1,3 +1,12 @@
+# Create accounts to generate the API token
+You will need to create accounts in two APIs of weather:
+- **Openweathermap**: https://openweathermap.org
+  - Open the file `<repository>/src/main/resources/application-prod.properties`
+  - Replace [API_KEY] with your generated key of **Openweathermap** at line `openweathermap.key=[API_KEY]`
+- **Clima Tempo**: https://advisor.climatempo.com.br/login
+  - Open the file `<repository>/src/main/resources/application-prod.properties`
+  - Replace [API_KEY] with your generated key of **Clima Tempo** at line `advisor.climatempo.key=[API_KEY]`
+
 # Premise
 
 You must have docker and docker-compose installed.
