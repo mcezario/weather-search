@@ -1,4 +1,5 @@
-package org.mcezario.weather.search.gateway.application.domain.model;
+package org.mcezario.weather.search.gateway.openweathermap.domain.model;
+
 
 public final class Main {
 

@@ -1,6 +1,7 @@
-package org.mcezario.weather.search.gateway.application.domain.model;
+package org.mcezario.weather.search.gateway.climatempo.domain.model;
 
-public class ClimaTempoData {
+
+public final class ClimaTempoData {
 
 	private int temperature;
 	private int humidity;

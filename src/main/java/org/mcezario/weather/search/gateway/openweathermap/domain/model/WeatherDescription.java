@@ -1,6 +1,6 @@
-package org.mcezario.weather.search.gateway.application.domain.model;
+package org.mcezario.weather.search.gateway.openweathermap.domain.model;
 
-public final class Weather {
+public final class WeatherDescription {
 
 	private String id;
 	private String main;

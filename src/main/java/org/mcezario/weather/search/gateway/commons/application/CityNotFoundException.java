@@ -1,4 +1,4 @@
-package org.mcezario.weather.search.gateway.application;
+package org.mcezario.weather.search.gateway.commons.application;
 
 import org.mcezario.weather.commons.domain.model.IdentifiableException;
 

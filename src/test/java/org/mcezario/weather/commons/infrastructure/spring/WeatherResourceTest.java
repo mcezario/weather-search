@@ -47,11 +47,11 @@ public class WeatherResourceTest {
 
 		assertEquals(HttpStatus.OK, response.getStatusCode());
 		assertEquals("Clouds - nuvens dispersas", response.getBody().getDescription());
-		assertEquals(30, response.getBody().getHumidity());
-		assertEquals(1018, response.getBody().getPressure());
-		assertEquals(new BigDecimal("28.0"), response.getBody().getTemperature().getActual());
-		assertEquals(new BigDecimal("20.0"), response.getBody().getTemperature().getMin());
-		assertEquals(new BigDecimal("29.0"), response.getBody().getTemperature().getMax());
+		assertEquals(new BigDecimal("30"), response.getBody().getHumidity());
+		assertEquals(new BigDecimal("1018"), response.getBody().getPressure());
+		assertEquals(new BigDecimal("28"), response.getBody().getTemperature().getActual());
+		assertEquals(new BigDecimal("20"), response.getBody().getTemperature().getMin());
+		assertEquals(new BigDecimal("29"), response.getBody().getTemperature().getMax());
 	}
 
 	@Test
@@ -61,8 +61,8 @@ public class WeatherResourceTest {
 
 		assertEquals(HttpStatus.OK, response.getStatusCode());
 		assertEquals("Alguma nebulosidade", response.getBody().getDescription());
-		assertEquals(34, response.getBody().getHumidity());
-		assertEquals(1018, response.getBody().getPressure());
+		assertEquals(new BigDecimal("34"), response.getBody().getHumidity());
+		assertEquals(new BigDecimal("1018"), response.getBody().getPressure());
 		assertEquals(new BigDecimal("27"), response.getBody().getTemperature().getActual());
 		assertNull(response.getBody().getTemperature().getMin());
 		assertNull(response.getBody().getTemperature().getMax());

@@ -3,8 +3,7 @@ package org.mcezario.weather.search.application.representation;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-import org.mcezario.weather.search.gateway.application.domain.model.ClimaTempoData;
-import org.mcezario.weather.search.gateway.application.domain.model.Main;
+import org.mcezario.weather.search.gateway.commons.domain.model.Temperature;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -30,24 +29,16 @@ public final class TemperatureRepresentation implements Serializable {
 	private final BigDecimal max;
 
 	@JsonCreator
-	public TemperatureRepresentation(@JsonProperty(TEMPERATURE_ACTUAL) BigDecimal actual,
-			@JsonProperty(TEMPERATURE_MIN) BigDecimal min,
-			@JsonProperty(TEMPERATURE_MAX) BigDecimal max) {
+	public TemperatureRepresentation(@JsonProperty(TEMPERATURE_ACTUAL) final BigDecimal actual,
+			@JsonProperty(TEMPERATURE_MIN) final BigDecimal min,
+			@JsonProperty(TEMPERATURE_MAX) final BigDecimal max) {
 		this.actual = actual;
 		this.min = min;
 		this.max = max;
 	}
 
-	public static TemperatureRepresentation fromOpenWeatherMap(final Main main) {
-		return new TemperatureRepresentation(
-				BigDecimal.valueOf(main.getTemp()),
-				BigDecimal.valueOf(main.getTemp_min()),
-				BigDecimal.valueOf(main.getTemp_max())
-				);
-	}
-
-	public static TemperatureRepresentation fromClimaTempo(final ClimaTempoData data) {
-		return new TemperatureRepresentation(BigDecimal.valueOf(data.getTemperature()), null, null);
+	public TemperatureRepresentation(final Temperature t) {
+		this(t.actual(), t.min().orElse(null), t.max().orElse(null));
 	}
 
 	public final BigDecimal getActual() {

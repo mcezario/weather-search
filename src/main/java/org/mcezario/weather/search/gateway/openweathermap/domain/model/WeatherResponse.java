@@ -1,11 +1,11 @@
-package org.mcezario.weather.search.gateway.application.domain.model;
+package org.mcezario.weather.search.gateway.openweathermap.domain.model;
 
 import java.util.List;
 
-public class WeatherResponse {
+public final class WeatherResponse {
 
 	private String name;
-	private List<Weather> weather;
+	private List<WeatherDescription> weather;
 	private Main main;
 
 	public String getName() {
@@ -16,11 +16,11 @@ public class WeatherResponse {
 		this.name = name;
 	}
 
-	public List<Weather> getWeather() {
+	public List<WeatherDescription> getWeather() {
 		return weather;
 	}
 
-	public void setWeather(List<Weather> weather) {
+	public void setWeather(List<WeatherDescription> weather) {
 		this.weather = weather;
 	}
 

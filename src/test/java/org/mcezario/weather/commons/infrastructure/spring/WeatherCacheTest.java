@@ -13,9 +13,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mcezario.weather.search.application.WeatherService;
-import org.mcezario.weather.search.gateway.application.domain.model.Main;
-import org.mcezario.weather.search.gateway.application.domain.model.Weather;
-import org.mcezario.weather.search.gateway.application.domain.model.WeatherResponse;
+import org.mcezario.weather.search.gateway.openweathermap.domain.model.Main;
+import org.mcezario.weather.search.gateway.openweathermap.domain.model.WeatherDescription;
+import org.mcezario.weather.search.gateway.openweathermap.domain.model.WeatherResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.SpyBean;
@@ -66,7 +66,7 @@ public class WeatherCacheTest {
     	main.setTemp_min(25d);
     	response.setMain(main);
 
-    	final Weather weather = new Weather();
+    	final WeatherDescription weather = new WeatherDescription();
     	weather.setMain("Main");
     	weather.setDescription("Description");
     	response.setWeather(Collections.singletonList(weather));

@@ -1,13 +1,9 @@
 package org.mcezario.weather.search.application.representation;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
-import org.apache.commons.lang3.StringUtils;
-import org.mcezario.weather.search.gateway.application.domain.model.ClimaTempoData;
-import org.mcezario.weather.search.gateway.application.domain.model.ClimaTempoDataResponse;
-import org.mcezario.weather.search.gateway.application.domain.model.Main;
-import org.mcezario.weather.search.gateway.application.domain.model.Weather;
-import org.mcezario.weather.search.gateway.application.domain.model.WeatherResponse;
+import org.mcezario.weather.search.gateway.commons.domain.model.Weather;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -28,18 +24,18 @@ public final class WeatherRepresentation implements Serializable {
 	private final String description;
 
 	@JsonProperty(value = PRESSURE_ATTRIBUTE)
-	private final int pressure;
+	private final BigDecimal pressure;
 
 	@JsonProperty(value = HUMIDITY_ATTRIBUTE)
-	private final int humidity;
+	private final BigDecimal humidity;
 
 	@JsonProperty(value = TEMPERATURE_ATTRIBUTE)
 	private final TemperatureRepresentation temperature;
 
 	@JsonCreator
 	public WeatherRepresentation(@JsonProperty(value = DESCRIPTION_ATTRIBUTE) final String description,
-			@JsonProperty(value = PRESSURE_ATTRIBUTE) final int pressure,
-			@JsonProperty(value = HUMIDITY_ATTRIBUTE) final int humidity,
+			@JsonProperty(value = PRESSURE_ATTRIBUTE) final BigDecimal pressure,
+			@JsonProperty(value = HUMIDITY_ATTRIBUTE) final BigDecimal humidity,
 			@JsonProperty(value = TEMPERATURE_ATTRIBUTE) final TemperatureRepresentation temperature) {
 		this.description = description;
 		this.pressure = pressure;
@@ -47,29 +43,19 @@ public final class WeatherRepresentation implements Serializable {
 		this.temperature = temperature;
 	}
 
-	public static WeatherRepresentation fromOpenWeatherMap(final WeatherResponse response) {
-		final Main main = response.getMain();
-		final Weather weather = response.getWeather().iterator().next();
-		final String description = StringUtils.join(weather.getMain(), " - ", weather.getDescription());
-
-		return new WeatherRepresentation(description, main.getPressure(), main.getHumidity(), TemperatureRepresentation.fromOpenWeatherMap(main));
-	}
-
-	public static WeatherRepresentation fromClimaTempo(final ClimaTempoDataResponse response) {
-		final ClimaTempoData data = response.getData();
-
-		return new WeatherRepresentation(data.getCondition(), data.getPressure(), data.getHumidity(), TemperatureRepresentation.fromClimaTempo(data));
+	public WeatherRepresentation(final Weather w) {
+		this(w.description(), w.pressure(), w.humidity(), new TemperatureRepresentation(w.temperature()));
 	}
 
 	public final String getDescription() {
 		return description;
 	}
 
-	public final int getPressure() {
+	public final BigDecimal getPressure() {
 		return pressure;
 	}
 
-	public final int getHumidity() {
+	public final BigDecimal getHumidity() {
 		return humidity;
 	}
 

@@ -3,9 +3,9 @@ package org.mcezario.weather.search.application;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.mcezario.weather.search.application.representation.WeatherRepresentation;
-import org.mcezario.weather.search.gateway.application.CityNotFoundException;
-import org.mcezario.weather.search.gateway.application.ClimatempoGatewayService;
-import org.mcezario.weather.search.gateway.application.OpenWeatherMapGatewayService;
+import org.mcezario.weather.search.gateway.climatempo.application.ClimatempoGatewayService;
+import org.mcezario.weather.search.gateway.commons.application.CityNotFoundException;
+import org.mcezario.weather.search.gateway.openweathermap.application.OpenWeatherMapGatewayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -25,24 +25,24 @@ public class WeatherService {
 
 	@Cacheable(value = "weather")
 	@HystrixCommand(fallbackMethod = "fallBackOfOpenWeatherMap")
-	public WeatherRepresentation findByCity(String city) {
+	public WeatherRepresentation findByCity(final String city) {
 
 		LOGGER.debug("[OpenWeatherMap] Find by city={}", city);
 
-		return WeatherRepresentation.fromOpenWeatherMap(openWeatherMapGatewayService.getWeatherByCity(city));
+		return new WeatherRepresentation(openWeatherMapGatewayService.getWeatherByCity(city));
 
 	}
 
 	@HystrixCommand(fallbackMethod = "fallbackOfClimaTempo")
-	public WeatherRepresentation fallBackOfOpenWeatherMap(String city) {
+	public WeatherRepresentation fallBackOfOpenWeatherMap(final String city) {
 
 		LOGGER.debug("[ClimaTempo] Find by city={}", city);
 
-		return WeatherRepresentation.fromClimaTempo(climatempoGatewayService.getWeatherByCity(city));
+		return new WeatherRepresentation(climatempoGatewayService.getWeatherByCity(city));
 
 	}
 
-	public WeatherRepresentation fallbackOfClimaTempo(String city) {
+	public WeatherRepresentation fallbackOfClimaTempo(final String city) {
 
 		LOGGER.error("Error to find by city={}", city);
 

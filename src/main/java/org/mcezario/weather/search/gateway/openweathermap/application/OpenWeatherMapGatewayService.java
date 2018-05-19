@@ -1,6 +1,8 @@
-package org.mcezario.weather.search.gateway.application;
+package org.mcezario.weather.search.gateway.openweathermap.application;
 
-import org.mcezario.weather.search.gateway.application.domain.model.WeatherResponse;
+
+import org.mcezario.weather.search.gateway.commons.domain.model.Weather;
+import org.mcezario.weather.search.gateway.openweathermap.domain.model.WeatherResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -20,8 +22,10 @@ public class OpenWeatherMapGatewayService {
 		this.restTemplate = rest;
 	}
 
-	public WeatherResponse getWeatherByCity(final String city) {
-		return this.restTemplate.getForObject(uri, WeatherResponse.class, city, appId);
+	public Weather getWeatherByCity(final String city) {
+		final WeatherResponse response = this.restTemplate.getForObject(uri, WeatherResponse.class, city, appId);
+		
+		return Weather.fromOpenWeatherMap(response);
 	}
 
 }
