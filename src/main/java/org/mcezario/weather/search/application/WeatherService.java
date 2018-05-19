@@ -24,7 +24,7 @@ public class WeatherService {
 	private ClimatempoGatewayService climatempoGatewayService;
 
 	@Cacheable(value = "weather")
-	@HystrixCommand(fallbackMethod = "fallBackOfOpenWeatherMap")
+	@HystrixCommand(fallbackMethod = "fallBackOfOpenWeatherMap", ignoreExceptions = { CityNotFoundException.class })
 	public WeatherRepresentation findByCity(final String city) {
 
 		LOGGER.debug("[OpenWeatherMap] Find by city={}", city);
@@ -46,6 +46,6 @@ public class WeatherService {
 
 		LOGGER.error("Error to find by city={}", city);
 
-		throw new CityNotFoundException(city);
+		throw new SearchByCityException(city);
 	}
 }

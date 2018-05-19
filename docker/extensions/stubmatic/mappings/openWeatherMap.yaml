@@ -2,6 +2,20 @@
     method: GET
     url: /data/2.5/weather
     query:
+        q: cidadeNaoValida,br
+        appid: 12345
+        lang: pt
+        units: metric
+  response:
+    headers:
+      content-type: application/json; charset=UTF-8
+    status: 404
+    file: "openWeatherMap/cityNotFound.json"
+
+- request:
+    method: GET
+    url: /data/2.5/weather
+    query:
         q: Campinas,br
         appid: 12345
         lang: pt
@@ -9,4 +23,18 @@
   response:
     headers:
       content-type: application/json; charset=UTF-8
-    files: ["openWeatherMap/weather.json", { "status": 500 }]
+    status: 200
+    file: "openWeatherMap/weather.json"
+
+- request:
+    method: GET
+    url: /data/2.5/weather
+    query:
+        q: (.*)
+        appid: 12345
+        lang: pt
+        units: metric
+  response:
+    headers:
+      content-type: application/json; charset=UTF-8
+    status: 500

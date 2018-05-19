@@ -74,8 +74,18 @@ public class WeatherResourceTest {
 		final ResponseEntity<ExceptionRepresentation> response = restTemplate.getForEntity("/weather?city=Vinhedo", ExceptionRepresentation.class);
 
 		assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
-		assertEquals("WTS-0400", response.getBody().getCode());
+		assertEquals("SWS-0400", response.getBody().getCode());
 		assertEquals("Temperatura indisponível para a cidade Vinhedo", response.getBody().getMessage());
+	}
+	
+	@Test
+	public void shouldGetBadRequest_404_ifCityNotFound() {
+
+		final ResponseEntity<ExceptionRepresentation> response = restTemplate.getForEntity("/weather?city=cidadeNaoValida", ExceptionRepresentation.class);
+
+		assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+		assertEquals("GWS-0404", response.getBody().getCode());
+		assertEquals("Cidade não encontrada: cidadeNaoValida", response.getBody().getMessage());
 	}
 
 }

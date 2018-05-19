@@ -1,6 +1,7 @@
 package org.mcezario.weather.search.gateway.openweathermap.application;
 
 
+import org.mcezario.weather.search.gateway.commons.application.CityNotFoundErrorHandlerFactory;
 import org.mcezario.weather.search.gateway.commons.domain.model.Weather;
 import org.mcezario.weather.search.gateway.openweathermap.domain.model.WeatherResponse;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,6 +24,8 @@ public class OpenWeatherMapGatewayService {
 	}
 
 	public Weather getWeatherByCity(final String city) {
+		this.restTemplate.setErrorHandler(CityNotFoundErrorHandlerFactory.create(city));
+		
 		final WeatherResponse response = this.restTemplate.getForObject(uri, WeatherResponse.class, city, appId);
 		
 		return Weather.fromOpenWeatherMap(response);

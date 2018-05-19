@@ -4,9 +4,9 @@ package org.mcezario.weather.search.gateway.climatempo.application;
 import java.util.Arrays;
 
 import org.apache.commons.collections4.ListUtils;
+import org.mcezario.weather.search.application.SearchByCityException;
 import org.mcezario.weather.search.gateway.climatempo.domain.model.City;
 import org.mcezario.weather.search.gateway.climatempo.domain.model.ClimaTempoDataResponse;
-import org.mcezario.weather.search.gateway.commons.application.CityNotFoundException;
 import org.mcezario.weather.search.gateway.commons.domain.model.Weather;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -36,7 +36,7 @@ public class ClimatempoGatewayService {
 		final City city = ListUtils.emptyIfNull(Arrays.asList(cities)) //
 				.stream() //
 				.findFirst() //
-				.orElseThrow(() -> new CityNotFoundException(cityName));
+				.orElseThrow(() -> new SearchByCityException(cityName));
 
 		final ClimaTempoDataResponse response = this.restTemplate.getForObject(cityUri, ClimaTempoDataResponse.class, city.getId(), appId);
 		
