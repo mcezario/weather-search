@@ -3,7 +3,7 @@ package org.mcezario.weather.search.application.representation;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-import org.mcezario.weather.search.gateway.commons.domain.model.Weather;
+import org.mcezario.weather.search.domain.model.Weather;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;

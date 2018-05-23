@@ -24,7 +24,7 @@ public final class WeatherResource {
 	@Produces({ ContentNegotiation.MOBILE_V1, ContentNegotiation.DESKTOP_V1 })
 	@Path("/")
 	public WeatherRepresentation weather(@QueryParam("city") String city) {
-		return service.findByCity(city);
+		return new WeatherRepresentation(service.findByCity(city));
 	}
 
 }

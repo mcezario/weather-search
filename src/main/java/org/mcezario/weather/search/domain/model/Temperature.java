@@ -1,4 +1,4 @@
-package org.mcezario.weather.search.gateway.commons.domain.model;
+package org.mcezario.weather.search.domain.model;
 
 import java.math.BigDecimal;
 import java.util.Optional;

@@ -7,7 +7,6 @@ import org.apache.commons.collections4.ListUtils;
 import org.mcezario.weather.search.application.SearchByCityException;
 import org.mcezario.weather.search.gateway.climatempo.domain.model.City;
 import org.mcezario.weather.search.gateway.climatempo.domain.model.ClimaTempoDataResponse;
-import org.mcezario.weather.search.gateway.commons.domain.model.Weather;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -30,7 +29,7 @@ public class ClimatempoGatewayService {
 		this.restTemplate = rest;
 	}
 
-	public Weather getWeatherByCity(final String cityName) {
+	public ClimaTempoDataResponse getWeatherByCity(final String cityName) {
 		final City[] cities = this.restTemplate.getForObject(citiesUri, City[].class, cityName, appId);
 
 		final City city = ListUtils.emptyIfNull(Arrays.asList(cities)) //
@@ -38,9 +37,8 @@ public class ClimatempoGatewayService {
 				.findFirst() //
 				.orElseThrow(() -> new SearchByCityException(cityName));
 
-		final ClimaTempoDataResponse response = this.restTemplate.getForObject(cityUri, ClimaTempoDataResponse.class, city.getId(), appId);
+		return this.restTemplate.getForObject(cityUri, ClimaTempoDataResponse.class, city.getId(), appId);
 		
-		return Weather.fromClimaTempo(response);
 	}
 
 }
